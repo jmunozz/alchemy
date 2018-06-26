@@ -1,11 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 
 const Errors = require('./libs/errors');
 const publicRouter = require('./routes/public');
 const privateRouter = require('./routes/private');
 
 const app = express();
+
+/**
+ * CORS
+ */
+app.use(cors());
 
 /**
  * Parser
@@ -29,6 +35,6 @@ app.use((err, req, res, next) => {
   return Errors.send(res, err);
 });
 
-app.listen(3000, () => {
-  console.log('App is listening on port 3000');
+app.listen(4000, () => {
+  console.log('App is listening on port 4000');
 });

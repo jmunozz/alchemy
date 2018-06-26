@@ -1,0 +1,66 @@
+.craft-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr 2fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+    padding:20px 10px;
+}
+
+.craft-ingredient {
+    background-color: #9A8C98;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+}
+
+.craft-ingredient div {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.craft-ingredient img {
+    width:100%;
+}
+
+.craft-cta {
+    display: flex;
+    grid-column: 2/3;
+    justify-content: center;
+    align-items: center;
+}
+
+.craft-cta button {
+    width: 100%;
+    height: 50%;
+    border-radius: 5px;
+    font-size: 2em;
+    font-weight: 700;
+    background-color: #4A4E69;
+}
+
+.craft-result {
+    grid-column: 1/4;
+    background-color: #9A8C98;
+    padding: 20px;
+}
+
+.craft-result div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.craft-result p {
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+
+.craft-result div img {
+    height: 300px;
+    width: 300px;
+    align-self: center;
+}

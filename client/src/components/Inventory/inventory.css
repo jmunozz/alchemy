@@ -1,0 +1,52 @@
+.inventory-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 150px);
+    grid-template-rows: repeat(auto-fill, 150px); 
+    grid-gap: 10px;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.inventory-ingredient {
+    background-color: #9A8C98;
+    position: relative;
+    padding: 10px;
+}
+
+.inventory-ingredient img {
+    width: 100%;
+}
+
+.inventory-ingredient span {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+}
+
+.inventory-ingredient .inventory-ingredient-content {
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    right: 0;
+    left: 0;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 800;
+    z-index: 3;
+}
+
+.inventory-ingredient .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.4;
+
+}
+
+.inventory-ingredient .overlay:hover {
+    opacity: 0.2;
+}

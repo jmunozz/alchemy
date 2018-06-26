@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const hash = require('hash-string');
 const Token = require('../libs/token');
 const Errors = require('../libs/errors');
 
@@ -17,11 +18,14 @@ const create = (req, res, next) => {
   }).required();
 
   return Joi.validate(req.body, schema)
+    .catch((e) => {
+      throw Errors.buildValidationError(e);
+    })
     .then((params) => {
       let user = Users.getUserByUsername(params.username);
       if (user) throw Errors.build('BadRequestError', 'Username does already exist.', 403);
       user = new Users(params.username, params.password);
-      return res.json({ token: Token.encodeToken(user) });
+      return res.json({ token: Token.encodeFromUser(user) });
     })
     .catch(e => next(e));
 };
@@ -39,10 +43,14 @@ const token = (req, res, next) => {
   });
 
   return Joi.validate(req.body, schema)
+    .catch((e) => {
+      throw Errors.buildValidationError(e);
+    })
     .then((params) => {
       let user = Users.getUserByUsername(params.username);
+      if (user && user.payload.password !== hash(params.password)) throw Errors.build('AuthenticationError', 'Password is wrong for this user', 403);
       if (!user) user = new Users(params.username, params.password);
-      return res.json({ token: Token.encodeToken(user) });
+      return res.json({ token: Token.encodeFromUser(user) });
     })
     .catch(e => next(e));
 };
@@ -66,10 +74,14 @@ const craft = (req, res, next) => {
     ingredients: Joi.array().items(Joi.object().keys({
       id: Joi.number().required(),
       quantity: Joi.number().required(),
-    })).required(),
+    })).min(3).max(3)
+      .required(),
   });
 
   return Joi.validate(req.body, schema)
+    .catch((e) => {
+      throw Errors.buildValidationError(e);
+    })
     .then((params) => {
       // User is in request because of authentication middleware.
       const { user } = req;
