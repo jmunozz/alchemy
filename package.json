@@ -4,7 +4,11 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"build": "npm install && (cd client && npm install)",
+	"client": "(cd client && yarn start)",
+	"server": "node src/index.js",
+	"start": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
